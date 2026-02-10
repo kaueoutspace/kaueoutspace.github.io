@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background-image: url(../img/perfilNeon.jpg);
+    background-size: 80px;
+}
+
+img {
+    max-height: 150px;
+    border-radius: 100%;
+    margin: 10px;
+    display: block;
+    /*border: 3px solid blue;*/
+
+}
+
+h1 {
+    color: darkmagenta;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border: 3px solid blue;
+    margin: 0 auto;
+}
