@@ -4,209 +4,582 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Kauê Oliveira | Outspace — Building useful and playful products with AI.">
+
+  <meta
+    name="description"
+    content="Kauê Oliveira | Outspace — Building useful and playful products with AI."
+  >
+
   <title>Kauê Oliveira | Outspace</title>
 
   <style>
     :root {
-      color-scheme: dark;
-      font-family: system-ui, -apple-system, sans-serif;
+      --navy: #08082c;
+      --blue: #000080;
+      --cyan: #00ffff;
+      --lime: #00ff66;
+      --yellow: #ffff00;
+      --purple: #cc99ff;
+      --silver: #c0c0c0;
+      --white: #ffffff;
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      min-height: 100vh;
-      background: #101014;
-      color: #f4f4f5;
-      display: flex;
-      justify-content: center;
-      padding: 64px 24px;
-    }
-
-    main {
-      width: 100%;
-      max-width: 640px;
-    }
-
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #32323c;
-    }
-
-    h1 {
-      font-size: 2rem;
-      margin: 24px 0 8px;
-    }
-
-    h2 {
-      font-size: 1.1rem;
-      margin-top: 48px;
-    }
-
-    p {
-      color: #a1a1aa;
-      line-height: 1.7;
+      padding: 24px 12px;
+      background-color: var(--navy);
+      background-image:
+        radial-gradient(
+          1px 1px at 20px 30px,
+          white 99%, transparent
+        ),
+        radial-gradient(
+          2px 2px at 90px 80px,
+          #aaaaff 99%, transparent
+        ),
+        radial-gradient(
+          1px 1px at 150px 140px,
+          white 99%, transparent
+        );
+      background-size: 180px 180px;
+      color: white;
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 13px;
+      line-height: 1.6;
     }
 
     a {
-      color: #c4b5fd;
-      text-decoration: none;
+      color: var(--cyan);
+      text-decoration: underline;
+    }
+
+    a:visited {
+      color: var(--purple);
     }
 
     a:hover {
-      text-decoration: underline;
+      color: var(--yellow);
+    }
+
+    a:focus-visible {
+      outline: 2px dashed var(--yellow);
+      outline-offset: 4px;
+    }
+
+    .site {
+      max-width: 760px;
+      margin: 0 auto;
+      border: 4px ridge var(--silver);
+      background: #101040;
+      box-shadow: 8px 8px 0 #000;
+    }
+
+    /* HEADER */
+
+    .topbar {
+      padding: 6px 12px;
+      background: var(--silver);
+      color: #000080;
+      border-bottom: 3px ridge white;
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    header {
+      text-align: center;
+      padding: 32px 20px;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent 0,
+          transparent 3px,
+          #ffffff08 4px
+        ),
+        linear-gradient(
+          135deg,
+          #210050,
+          #000066,
+          #102060
+        );
+      border-bottom: 4px ridge var(--cyan);
+    }
+
+    .welcome {
+      color: var(--yellow);
+      font-family: "Courier New", monospace;
+      font-weight: bold;
+      letter-spacing: 3px;
+      font-size: 12px;
+    }
+
+    .avatar {
+      display: block;
+      width: 130px;
+      height: 130px;
+      margin: 24px auto;
+      object-fit: cover;
+      border: 5px ridge var(--silver);
+      background: #000;
+      box-shadow: 5px 5px 0 #000;
+    }
+
+    h1 {
+      margin: 12px 0;
+      color: var(--cyan);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: clamp(24px, 5vw, 34px);
+      line-height: 1.2;
+      text-shadow:
+        3px 3px 0 #660099,
+        5px 5px 0 #000;
+    }
+
+    .tagline {
+      color: var(--lime);
+      font-family: "Courier New", monospace;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .intro {
+      max-width: 540px;
+      margin: 20px auto;
+      color: #ddddff;
+    }
+
+    /* RETRO NAVIGATION */
+
+    .navigation {
+      background: #000066;
+      padding: 18px;
+      text-align: center;
+      border-bottom: 3px ridge var(--silver);
+    }
+
+    .nav-title {
+      margin-bottom: 12px;
+      color: var(--yellow);
+      font-family: "Courier New", monospace;
+      font-size: 12px;
     }
 
     .links {
       display: flex;
-      gap: 20px;
+      justify-content: center;
       flex-wrap: wrap;
-      margin-top: 24px;
+      gap: 10px;
+    }
+
+    .retro-button {
+      display: inline-block;
+      padding: 7px 14px;
+      background: var(--silver);
+      color: #000080 !important;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      font-weight: bold;
+      text-decoration: none;
+      border: 3px outset white;
+      box-shadow: 2px 2px 0 black;
+    }
+
+    .retro-button:hover {
+      background: var(--yellow);
+      color: #000 !important;
+    }
+
+    .retro-button:active {
+      border-style: inset;
+      box-shadow: none;
+    }
+
+    /* CONTENT */
+
+    main {
+      padding: 22px;
+    }
+
+    .section-heading {
+      margin: 12px 0 18px;
+      padding: 7px 12px;
+      background: #000080;
+      color: var(--yellow);
+      border: 2px ridge var(--silver);
+      text-align: center;
+      font-family: "Courier New", monospace;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+
+    .section-heading::before,
+    .section-heading::after {
+      content: " ★ ";
+      color: var(--cyan);
     }
 
     .project {
-      padding: 20px 0;
-      border-bottom: 1px solid #27272a;
+      margin-bottom: 18px;
+      padding: 18px;
+      border: 2px ridge #8888ff;
+      background: #000033;
     }
 
     .project h3 {
-      margin: 0;
-      font-size: 1rem;
+      margin: 0 0 8px;
+      font-family: "Courier New", monospace;
+      font-size: 19px;
+      color: var(--cyan);
     }
 
     .project p {
-      margin: 8px 0;
+      color: #ccccff;
+      margin: 8px 0 14px;
     }
 
-    footer {
-      margin-top: 56px;
-      color: #71717a;
-      font-size: 0.85rem;
+    .status {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 1px 7px;
+      border: 1px solid currentColor;
+      font-family: "Courier New", monospace;
+      font-size: 10px;
+      vertical-align: middle;
     }
+
+    .live {
+      color: var(--lime);
+    }
+
+    .development {
+      color: var(--yellow);
+    }
+
+    .project-link {
+      font-family: "Courier New", monospace;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    .divider {
+      text-align: center;
+      margin: 28px 0;
+      color: var(--purple);
+      font-family: "Courier New", monospace;
+      letter-spacing: 4px;
+      overflow: hidden;
+    }
+
+    /* BOTTOM MESSAGE */
+
+    .message-box {
+      padding: 18px;
+      margin-top: 24px;
+      text-align: center;
+      background: #181850;
+      border: 2px dashed var(--purple);
+      font-family: "Courier New", monospace;
+    }
+
+    .message-box strong {
+      color: var(--yellow);
+    }
+
+    .message-box p {
+      color: var(--cyan);
+      margin-bottom: 0;
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 22px;
+      text-align: center;
+      background: #000020;
+      border-top: 3px ridge var(--silver);
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      color: #aaaadd;
+    }
+
+    footer a {
+      display: inline-block;
+      margin-top: 12px;
+    }
+
+    .footer-stars {
+      margin-bottom: 10px;
+      color: var(--yellow);
+      letter-spacing: 7px;
+    }
+
+    /* MOBILE */
 
     @media (max-width: 480px) {
       body {
-        padding: 40px 20px;
+        padding: 8px;
       }
 
-      h1 {
-        font-size: 1.7rem;
+      header {
+        padding: 25px 14px;
       }
 
       .avatar {
-        width: 100px;
-        height: 100px;
+        width: 110px;
+        height: 110px;
       }
 
-      .links {
-        gap: 12px 20px;
+      main {
+        padding: 12px;
+      }
+
+      .project {
+        padding: 14px;
+      }
+
+      .retro-button {
+        flex: 1 1 40%;
+        text-align: center;
+      }
+
+      .topbar {
+        font-size: 10px;
+      }
+
+      .section-heading {
+        font-size: 15px;
+      }
+
+      .section-heading::before,
+      .section-heading::after {
+        content: " * ";
       }
     }
   </style>
 </head>
 
-<body>
-  <main>
+<body id="top">
+
+  <div class="site">
+
+    <!-- WINDOW BAR -->
+
+    <div class="topbar">
+      <span>OUTSPACE.HTML</span>
+      <span>PERSONAL HOMEPAGE</span>
+    </div>
+
+    <!-- PROFILE HEADER -->
+
     <header>
+
+      <div class="welcome">
+        * * * WELCOME TO MY SPACE * * *
+      </div>
+
       <img
         src="img/perfilNeon.jpg"
-        alt="Kauê Oliveira profile picture"
+        alt="Kauê Oliveira"
         class="avatar"
       >
 
       <h1>Kauê Oliveira | Outspace</h1>
 
-      <p>
+      <p class="tagline">
         Building useful & playful products with AI.
       </p>
 
-      <p>
+      <p class="intro">
         Sharing product lessons, vibe coding experiments
         & what I learn along the way.
       </p>
 
-      <nav class="links" aria-label="Social profiles">
+    </header>
+
+    <!-- SOCIAL LINKS -->
+
+    <nav class="navigation" aria-label="Social profiles">
+
+      <div class="nav-title">
+        [ FIND ME ON THE INTERNET ]
+      </div>
+
+      <div class="links">
+
         <a
+          class="retro-button"
           href="https://x.com/outspace"
           target="_blank"
           rel="noopener noreferrer"
-        >X</a>
+        >
+          X / Twitter
+        </a>
 
         <a
-          href="https://www.producthunt.com/@cosmospace"
+          class="retro-button"
+          href="https://www.producthunt.com/@kaueoutspace"
           target="_blank"
           rel="noopener noreferrer"
-        >Product Hunt</a>
+        >
+          Product Hunt
+        </a>
 
         <a
+          class="retro-button"
           href="https://tg.app/creators/kaueoutspace/"
           target="_blank"
           rel="noopener noreferrer"
-        >TG.app</a>
+        >
+          TG.app
+        </a>
 
         <a
-          href="https://github.com/outspc"
+          class="retro-button"
+          href="https://github.com/kaueoutspace"
           target="_blank"
           rel="noopener noreferrer"
-        >GitHub</a>
-      </nav>
-    </header>
+        >
+          GitHub
+        </a>
 
-    <section>
-      <h2>Things I've built</h2>
+      </div>
+    </nav>
+
+    <!-- PROJECTS -->
+
+    <main>
+
+      <h2 class="section-heading">
+        Things I've Built
+      </h2>
+
+      <!-- CARDBEE -->
 
       <article class="project">
-        <h3>Cardbee</h3>
+
+        <h3>
+          Cardbee
+          <span class="status live">ONLINE</span>
+        </h3>
 
         <p>
-          Create and study flashcards right inside Telegram.
+          Create and study flashcards right inside
+          Telegram.
         </p>
 
         <a
+          class="project-link"
           href="https://cardbeebot.pages.dev/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Explore Cardbee →
+          &gt;&gt; Explore Cardbee
         </a>
+
       </article>
 
+      <!-- NOTEBEE -->
+
       <article class="project">
-        <h3>Notebee</h3>
+
+        <h3>
+          Notebee
+          <span class="status live">ONLINE</span>
+        </h3>
 
         <p>
           Your simple notes, right inside Telegram.
         </p>
 
         <a
+          class="project-link"
           href="https://notebeebot.pages.dev/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Explore Notebee →
+          &gt;&gt; Explore Notebee
         </a>
+
       </article>
 
+      <!-- LIVING FISH -->
+
       <article class="project">
-        <h3>Living Fish</h3>
+
+        <h3>
+          Living Fish
+          <span class="status development">COMING SOON</span>
+        </h3>
 
         <p>
           A virtual aquarium experience.
           Currently in development.
         </p>
+
+        <p style="
+          color: #ffff00;
+          font-family: 'Courier New', monospace;
+          font-size: 12px;
+        ">
+          [ UNDER CONSTRUCTION ]
+        </p>
+
       </article>
-    </section>
+
+      <div class="divider" aria-hidden="true">
+        * * * * * * * * *
+      </div>
+
+      <!-- PERSONAL MESSAGE -->
+
+      <aside class="message-box">
+
+        <strong>
+          [ BUILDING IN PUBLIC ]
+        </strong>
+
+        <p>
+          Building, learning & sharing.
+        </p>
+
+      </aside>
+
+    </main>
+
+    <!-- FOOTER -->
 
     <footer>
-      Building, learning & sharing.
+
+      <div class="footer-stars" aria-hidden="true">
+        ★ ★ ★ ★ ★
+      </div>
+
+      <div>
+        KAUÊ OLIVEIRA | OUTSPACE
+      </div>
+
+      <div>
+        Made for the World Wide Web.
+      </div>
+
+      <a href="#top">
+        [ BACK TO TOP ]
+      </a>
+
     </footer>
-  </main>
+
+  </div>
+
 </body>
 </html>
