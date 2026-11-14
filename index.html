@@ -4,366 +4,526 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta
-    name="description"
-    content="Kauê Oliveira | Outspace — Building useful and playful products with AI."
-  >
-
-  <title>Kauê Oliveira | Outspace</title>
+  <meta name="theme-color" content="#09002b">
+  <meta name="description" content="Kauê Oliveira | Outspace — building useful and playful products with AI.">
+  <title>Kauê Oliveira | Outspace · Personal Homepage</title>
 
   <style>
     :root {
-      --navy: #08082c;
-      --blue: #000080;
-      --cyan: #00ffff;
-      --lime: #00ff66;
-      --yellow: #ffff00;
-      --purple: #cc99ff;
+      --bg: #09002b;
+      --navy: #131459;
+      --blue: #090b89;
+      --cyan: #00f8ff;
+      --pink: #ff47e3;
+      --lime: #94ff43;
+      --yellow: #ffeb52;
       --silver: #c0c0c0;
-      --white: #ffffff;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      padding: 24px 12px;
-      background-color: var(--navy);
+      min-height: 100vh;
+      padding: 30px 14px 60px;
+      color: #fff;
+      font: 14px/1.65 Verdana, Geneva, sans-serif;
+      overflow-x: hidden;
+      background-color: var(--bg);
       background-image:
-        radial-gradient(
-          1px 1px at 20px 30px,
-          white 99%, transparent
-        ),
-        radial-gradient(
-          2px 2px at 90px 80px,
-          #aaaaff 99%, transparent
-        ),
-        radial-gradient(
-          1px 1px at 150px 140px,
-          white 99%, transparent
-        );
-      background-size: 180px 180px;
-      color: white;
-      font-family: Verdana, Geneva, sans-serif;
-      font-size: 13px;
-      line-height: 1.6;
+        radial-gradient(1px 1px at 30px 55px, #fff 99%, transparent),
+        radial-gradient(2px 2px at 160px 90px, #ad8dff 99%, transparent),
+        radial-gradient(1px 1px at 80px 165px, #36edff 99%, transparent);
+      background-size: 220px 210px, 320px 290px, 190px 270px;
+      animation: starfield 45s linear infinite;
     }
 
     a {
       color: var(--cyan);
-      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
-    a:visited {
-      color: var(--purple);
-    }
+    a:visited { color: #d7a7ff; }
+    a:hover { color: var(--yellow); }
 
-    a:hover {
-      color: var(--yellow);
-    }
-
-    a:focus-visible {
-      outline: 2px dashed var(--yellow);
+    :focus-visible {
+      outline: 3px dashed var(--yellow);
       outline-offset: 4px;
     }
 
-    .site {
-      max-width: 760px;
-      margin: 0 auto;
-      border: 4px ridge var(--silver);
-      background: #101040;
-      box-shadow: 8px 8px 0 #000;
+    /* SCROLL PROGRESS */
+
+    #scroll-meter {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 6px;
+      z-index: 99;
+      background: linear-gradient(
+        90deg, var(--cyan), var(--pink), var(--yellow)
+      );
+      box-shadow: 0 0 12px var(--pink);
     }
 
-    /* HEADER */
+    /* MAIN WINDOW */
 
-    .topbar {
-      padding: 6px 12px;
-      background: var(--silver);
-      color: #000080;
-      border-bottom: 3px ridge white;
-      font-family: "Courier New", monospace;
-      font-size: 12px;
-      font-weight: bold;
+    .shell {
+      width: min(100%, 920px);
+      margin: auto;
+      border: 5px ridge #e5e5f8;
+      background: #10103d;
+      box-shadow:
+        10px 10px 0 #000,
+        0 0 38px #eb33f744;
+    }
+
+    .window-bar {
       display: flex;
+      align-items: center;
       justify-content: space-between;
       gap: 12px;
+      padding: 5px 10px;
+      color: #fff;
+      background: linear-gradient(90deg, #00007e, #1777c2);
+      font: bold 12px "Courier New", monospace;
     }
 
-    header {
-      text-align: center;
-      padding: 32px 20px;
-      background:
-        repeating-linear-gradient(
-          0deg,
-          transparent 0,
-          transparent 3px,
-          #ffffff08 4px
-        ),
-        linear-gradient(
-          135deg,
-          #210050,
-          #000066,
-          #102060
-        );
-      border-bottom: 4px ridge var(--cyan);
+    .window-controls {
+      display: flex;
+      gap: 3px;
     }
 
-    .welcome {
+    .window-controls i {
+      display: block;
+      width: 15px;
+      height: 15px;
+      background: var(--silver);
+      border: 2px outset #fff;
+    }
+
+    /* ANIMATED MARQUEE */
+
+    .marquee {
+      overflow: hidden;
+      border-block: 2px ridge #e4e4ff;
+      background: #000;
+      white-space: nowrap;
       color: var(--yellow);
-      font-family: "Courier New", monospace;
-      font-weight: bold;
-      letter-spacing: 3px;
-      font-size: 12px;
+      font: bold 12px "Courier New", monospace;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 18s linear infinite;
+    }
+
+    .marquee-track span {
+      display: inline-block;
+      padding: 5px 2.5rem;
+    }
+
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    /* HERO */
+
+    .hero {
+      position: relative;
+      padding: 24px 28px 30px;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(
+        135deg,
+        #34065f 0%,
+        #08074a 54%,
+        #021d56 100%
+      );
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .21;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent 0 3px,
+        #fff 4px 4px
+      );
+    }
+
+    .hero > * { position: relative; }
+
+    .eyebrow {
+      color: var(--yellow);
+      font: bold 13px "Courier New", monospace;
+      letter-spacing: .17em;
+      text-shadow: 0 0 9px var(--pink);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr 1fr;
+      gap: 12px;
+      align-items: center;
+      margin-top: 12px;
     }
 
     .avatar {
-      display: block;
-      width: 130px;
-      height: 130px;
-      margin: 24px auto;
+      width: clamp(95px, 15vw, 144px);
+      aspect-ratio: 1;
       object-fit: cover;
-      border: 5px ridge var(--silver);
+      border: 6px ridge var(--silver);
+      box-shadow:
+        5px 5px 0 #000,
+        0 0 16px #21ebfc80;
+      background: #050517;
+    }
+
+    .center-star {
+      color: var(--yellow);
+      font-size: clamp(20px, 5vw, 45px);
+      line-height: 1.2;
+      animation: pulse 1.6s steps(2, end) infinite;
+    }
+
+    .ufo {
+      width: min(100%, 214px);
+      image-rendering: pixelated;
+      filter: drop-shadow(0 0 9px #ff28df);
+      border: 2px solid #7e56ff;
       background: #000;
-      box-shadow: 5px 5px 0 #000;
     }
 
     h1 {
-      margin: 12px 0;
+      margin: 14px 0 10px;
+      font: bold clamp(28px, 5vw, 43px)/1.2
+        "Trebuchet MS", Verdana, sans-serif;
       color: var(--cyan);
-      font-family: "Trebuchet MS", Verdana, sans-serif;
-      font-size: clamp(24px, 5vw, 34px);
-      line-height: 1.2;
       text-shadow:
-        3px 3px 0 #660099,
-        5px 5px 0 #000;
+        3px 3px 0 #7b00bb,
+        6px 6px 0 #000,
+        0 0 22px #00dcff80;
     }
 
     .tagline {
+      margin: 0;
       color: var(--lime);
-      font-family: "Courier New", monospace;
-      font-weight: bold;
-      font-size: 15px;
+      font: bold clamp(15px, 2.4vw, 19px)/1.5
+        "Courier New", monospace;
     }
 
-    .intro {
-      max-width: 540px;
-      margin: 20px auto;
-      color: #ddddff;
+    .hero-description {
+      max-width: 610px;
+      margin: 14px auto 0;
+      color: #f0e8ff;
     }
 
-    /* RETRO NAVIGATION */
+    .blink {
+      animation: blink 1s steps(1, end) infinite;
+    }
 
-    .navigation {
-      background: #000066;
-      padding: 18px;
+    /* SOCIAL NAVIGATION */
+
+    .nav {
+      padding: 15px 14px 20px;
+      border-block: 4px ridge var(--silver);
       text-align: center;
-      border-bottom: 3px ridge var(--silver);
+      background: #000b61;
     }
 
-    .nav-title {
+    .nav-label {
       margin-bottom: 12px;
       color: var(--yellow);
-      font-family: "Courier New", monospace;
-      font-size: 12px;
+      font: bold 12px "Courier New", monospace;
+      letter-spacing: .07em;
     }
 
-    .links {
+    .link-row {
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 10px;
     }
 
-    .retro-button {
+    .nav-button {
       display: inline-block;
-      padding: 7px 14px;
+      padding: 8px 14px;
+      color: #000066 !important;
       background: var(--silver);
-      color: #000080 !important;
-      font-family: Arial, sans-serif;
-      font-size: 13px;
-      font-weight: bold;
+      border: 3px outset #fff;
       text-decoration: none;
-      border: 3px outset white;
-      box-shadow: 2px 2px 0 black;
+      font: bold 13px Arial, sans-serif;
+      box-shadow: 3px 3px 0 #000;
     }
 
-    .retro-button:hover {
+    .nav-button:hover {
       background: var(--yellow);
-      color: #000 !important;
+      transform: translate(-1px, -1px);
     }
 
-    .retro-button:active {
+    .nav-button:active {
       border-style: inset;
+      transform: translate(2px, 2px);
       box-shadow: none;
     }
 
-    /* CONTENT */
+    /* CONTENT LAYOUT */
 
-    main {
+    .content {
+      display: grid;
+      grid-template-columns: 205px minmax(0, 1fr);
+      gap: 18px;
       padding: 22px;
     }
 
-    .section-heading {
-      margin: 12px 0 18px;
-      padding: 7px 12px;
-      background: #000080;
-      color: var(--yellow);
-      border: 2px ridge var(--silver);
-      text-align: center;
-      font-family: "Courier New", monospace;
-      font-size: 18px;
-      text-transform: uppercase;
+    /* SIDEBAR */
+
+    .side {
+      align-self: start;
+      border: 3px ridge var(--silver);
+      background: #040643;
+      font: 12px/1.7 "Courier New", monospace;
     }
 
-    .section-heading::before,
-    .section-heading::after {
-      content: " ★ ";
-      color: var(--cyan);
+    .side-title {
+      padding: 8px 10px;
+      background: linear-gradient(90deg, #8703a5, #250082);
+      color: var(--yellow);
+      font-weight: bold;
+    }
+
+    .side-inner { padding: 13px; }
+
+    .side a {
+      display: block;
+      padding: 3px 0;
+    }
+
+    .side small { color: #adbbef; }
+
+    .side-separator {
+      border: 0;
+      border-top: 1px dashed #9783ee;
+      margin: 15px 0;
+    }
+
+    .badge-90 {
+      display: block;
+      width: 100%;
+      margin-top: 9px;
+      padding: 6px 4px;
+      border: 2px outset #fff;
+      background: #000;
+      color: var(--lime);
+      font: bold 11px/1.4 "Courier New", monospace;
+      text-align: center;
+    }
+
+    .badge-90.pink { color: var(--pink); }
+
+    /* PROJECTS */
+
+    .section-title {
+      margin: 0 0 17px;
+      padding: 9px 12px;
+      border: 3px ridge var(--silver);
+      background: #000078;
+      color: var(--yellow);
+      text-align: center;
+      font: bold clamp(17px, 3vw, 23px)
+        "Courier New", monospace;
+      text-shadow: 2px 2px #a300aa;
     }
 
     .project {
       margin-bottom: 18px;
       padding: 18px;
-      border: 2px ridge #8888ff;
-      background: #000033;
+      border: 3px ridge #ae83f7;
+      background: linear-gradient(180deg, #090d43, #030529);
+      box-shadow: 4px 4px 0 #000;
+    }
+
+    .project-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
     }
 
     .project h3 {
-      margin: 0 0 8px;
-      font-family: "Courier New", monospace;
-      font-size: 19px;
+      margin: 0;
       color: var(--cyan);
-    }
-
-    .project p {
-      color: #ccccff;
-      margin: 8px 0 14px;
+      font: bold 22px "Courier New", monospace;
     }
 
     .status {
-      display: inline-block;
-      margin-left: 8px;
-      padding: 1px 7px;
+      padding: 2px 6px;
       border: 1px solid currentColor;
-      font-family: "Courier New", monospace;
-      font-size: 10px;
-      vertical-align: middle;
+      font: bold 10px "Courier New", monospace;
     }
 
-    .live {
-      color: var(--lime);
+    .online { color: var(--lime); }
+    .soon { color: var(--yellow); }
+
+    .project p {
+      margin: 10px 0 14px;
+      color: #d7d6ff;
     }
 
-    .development {
-      color: var(--yellow);
+    .new {
+      color: var(--pink);
+      font: bold 11px "Courier New", monospace;
+      animation: blink 1s steps(1, end) infinite;
     }
 
     .project-link {
-      font-family: "Courier New", monospace;
-      font-weight: bold;
-      font-size: 13px;
+      font: bold 13px "Courier New", monospace;
     }
 
-    .divider {
+    .construction {
+      color: var(--yellow);
+      font: bold 12px "Courier New", monospace;
+      letter-spacing: .03em;
+    }
+
+    /* MESSAGE */
+
+    .message {
+      padding: 14px;
       text-align: center;
-      margin: 28px 0;
-      color: var(--purple);
-      font-family: "Courier New", monospace;
-      letter-spacing: 4px;
+      border: 2px dashed var(--pink);
+      background: #241050;
+      font: 13px "Courier New", monospace;
+    }
+
+    .message strong { color: var(--yellow); }
+
+    .message p {
+      margin-bottom: 0;
+      color: var(--cyan);
+    }
+
+    /* BOTTOM TICKER */
+
+    .bottom-strip {
+      padding: 11px;
+      background: #000;
+      border-top: 3px ridge #c0c0c0;
+      color: var(--lime);
+      font: bold 12px "Courier New", monospace;
       overflow: hidden;
     }
 
-    /* BOTTOM MESSAGE */
-
-    .message-box {
-      padding: 18px;
-      margin-top: 24px;
-      text-align: center;
-      background: #181850;
-      border: 2px dashed var(--purple);
-      font-family: "Courier New", monospace;
-    }
-
-    .message-box strong {
-      color: var(--yellow);
-    }
-
-    .message-box p {
-      color: var(--cyan);
-      margin-bottom: 0;
+    .bottom-strip .ticker {
+      width: max-content;
+      white-space: nowrap;
+      animation: marquee 24s linear infinite reverse;
     }
 
     /* FOOTER */
 
     footer {
-      padding: 22px;
-      text-align: center;
-      background: #000020;
+      padding: 23px;
+      background: #04041c;
       border-top: 3px ridge var(--silver);
-      font-family: "Courier New", monospace;
-      font-size: 11px;
-      color: #aaaadd;
+      text-align: center;
+      color: #b5b0e2;
+      font: 12px/1.9 "Courier New", monospace;
     }
 
-    footer a {
-      display: inline-block;
-      margin-top: 12px;
-    }
-
-    .footer-stars {
-      margin-bottom: 10px;
+    .stars {
       color: var(--yellow);
-      letter-spacing: 7px;
+      letter-spacing: 8px;
+    }
+
+    /* SCROLL REVEAL */
+
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition:
+        opacity .6s ease,
+        transform .6s ease;
+    }
+
+    .js .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ANIMATIONS */
+
+    @keyframes marquee {
+      to { transform: translateX(-50%); }
+    }
+
+    @keyframes blink {
+      50% { visibility: hidden; }
+    }
+
+    @keyframes pulse {
+      50% {
+        transform: scale(1.13);
+        filter: drop-shadow(0 0 8px #ffe600);
+      }
+    }
+
+    @keyframes starfield {
+      to {
+        background-position:
+          220px 210px,
+          -320px 290px,
+          190px -270px;
+      }
     }
 
     /* MOBILE */
 
-    @media (max-width: 480px) {
-      body {
-        padding: 8px;
+    @media (max-width: 650px) {
+      body { padding: 9px 8px 35px; }
+      .hero { padding: 20px 12px 24px; }
+
+      .hero-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        justify-items: center;
       }
 
-      header {
-        padding: 25px 14px;
+      .center-star { display: none; }
+
+      .content {
+        grid-template-columns: 1fr;
+        padding: 13px;
       }
 
-      .avatar {
-        width: 110px;
-        height: 110px;
+      .side { order: 2; }
+      .nav-button { flex: 1 1 42%; }
+      .eyebrow { letter-spacing: .08em; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
       }
 
-      main {
-        padding: 12px;
+      .marquee-track,
+      .bottom-strip .ticker {
+        transform: none;
       }
 
-      .project {
-        padding: 14px;
-      }
-
-      .retro-button {
-        flex: 1 1 40%;
-        text-align: center;
-      }
-
-      .topbar {
-        font-size: 10px;
-      }
-
-      .section-heading {
-        font-size: 15px;
-      }
-
-      .section-heading::before,
-      .section-heading::after {
-        content: " * ";
+      .js .reveal {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
@@ -371,215 +531,356 @@
 
 <body id="top">
 
-  <div class="site">
+  <div id="scroll-meter" aria-hidden="true"></div>
+
+  <div class="shell">
 
     <!-- WINDOW BAR -->
 
-    <div class="topbar">
-      <span>OUTSPACE.HTML</span>
-      <span>PERSONAL HOMEPAGE</span>
+    <div class="window-bar">
+      <span>▣ OUTSPACE.EXE — PERSONAL HOMEPAGE</span>
+      <span class="window-controls" aria-hidden="true">
+        <i></i><i></i><i></i>
+      </span>
     </div>
 
-    <!-- PROFILE HEADER -->
+    <!-- ANIMATED TOP MARQUEE -->
 
-    <header>
+    <div class="marquee" aria-label="Welcome to my corner of the World Wide Web">
+      <div class="marquee-track" aria-hidden="true">
+        <span>★ WELCOME TO OUTSPACE ★ 100% HANDMADE INTERNET ENERGY ★ BUILDING IN PUBLIC ★</span>
+        <span>★ WELCOME TO OUTSPACE ★ 100% HANDMADE INTERNET ENERGY ★ BUILDING IN PUBLIC ★</span>
+      </div>
+    </div>
 
-      <div class="welcome">
-        * * * WELCOME TO MY SPACE * * *
+    <!-- HERO -->
+
+    <header class="hero">
+
+      <div class="eyebrow">
+        [ WELCOME TO MY LITTLE CORNER OF THE WEB ]
       </div>
 
-      <img
-        src="img/perfilNeon.jpg"
-        alt="Kauê Oliveira"
-        class="avatar"
-      >
+      <div class="hero-grid">
 
-      <h1>Kauê Oliveira | Outspace</h1>
+        <img
+          class="avatar"
+          src="img/perfilNeon.jpg"
+          alt="Portrait of Kauê Oliveira"
+          width="144"
+          height="144"
+        >
+
+        <span class="center-star" aria-hidden="true">
+          ✦<br>★<br>✦
+        </span>
+
+        <img
+          class="ufo"
+          src="img/outspace-ufo.gif"
+          alt="Animated pixel-art UFO flying across purple space"
+          width="214"
+          height="160"
+        >
+
+      </div>
+
+      <h1>
+        Kauê Oliveira
+        <span style="color:#ffe552">|</span>
+        Outspace<span class="blink" aria-hidden="true">_</span>
+      </h1>
 
       <p class="tagline">
-        Building useful & playful products with AI.
+        &gt; Building useful &amp; playful products with AI.
       </p>
 
-      <p class="intro">
+      <p class="hero-description">
         Sharing product lessons, vibe coding experiments
-        & what I learn along the way.
+        &amp; what I learn along the way.
       </p>
 
     </header>
 
-    <!-- SOCIAL LINKS -->
+    <!-- SOCIAL PROFILES -->
 
-    <nav class="navigation" aria-label="Social profiles">
+    <nav class="nav" aria-label="Social profiles">
 
-      <div class="nav-title">
-        [ FIND ME ON THE INTERNET ]
+      <div class="nav-label">
+        [ FIND ME ON THE INFORMATION SUPERHIGHWAY ]
       </div>
 
-      <div class="links">
+      <div class="link-row">
 
         <a
-          class="retro-button"
+          class="nav-button"
           href="https://x.com/outspace"
           target="_blank"
           rel="noopener noreferrer"
-        >
-          X / Twitter
-        </a>
+        >✳ X / Twitter</a>
 
         <a
-          class="retro-button"
+          class="nav-button"
           href="https://www.producthunt.com/@kaueoutspace"
           target="_blank"
           rel="noopener noreferrer"
-        >
-          Product Hunt
-        </a>
+        >✳ Product Hunt</a>
 
         <a
-          class="retro-button"
+          class="nav-button"
           href="https://tg.app/creators/kaueoutspace/"
           target="_blank"
           rel="noopener noreferrer"
-        >
-          TG.app
-        </a>
+        >✳ TG.app</a>
 
         <a
-          class="retro-button"
+          class="nav-button"
           href="https://github.com/kaueoutspace"
           target="_blank"
           rel="noopener noreferrer"
-        >
-          GitHub
-        </a>
+        >✳ GitHub</a>
+
+        <a
+          class="nav-button"
+          href="https://www.linkedin.com/in/kauepm/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >✳ LinkedIn</a>
 
       </div>
     </nav>
 
-    <!-- PROJECTS -->
+    <!-- MAIN CONTENT -->
 
-    <main>
+    <div class="content">
 
-      <h2 class="section-heading">
-        Things I've Built
-      </h2>
+      <!-- SIDEBAR -->
 
-      <!-- CARDBEE -->
+      <aside class="side" aria-label="Site directory">
 
-      <article class="project">
+        <div class="side-title">
+          :: SITE DIRECTORY ::
+        </div>
 
-        <h3>
-          Cardbee
-          <span class="status live">ONLINE</span>
-        </h3>
+        <div class="side-inner">
 
-        <p>
-          Create and study flashcards right inside
-          Telegram.
-        </p>
+          <a href="#projects">&gt; Things I've Built</a>
+          <a href="#currently-building">&gt; Coming Soon</a>
+          <a href="#broadcast">&gt; Broadcast</a>
 
-        <a
-          class="project-link"
-          href="https://cardbeebot.pages.dev/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          &gt;&gt; Explore Cardbee
-        </a>
+          <hr class="side-separator">
 
-      </article>
+          <small>
+            TRANSMITTING FROM:<br>
+            OUTSPACE / WORLD WIDE WEB
+          </small>
 
-      <!-- NOTEBEE -->
+          <span class="badge-90">
+            [ AI + HUMAN IDEAS ]
+          </span>
 
-      <article class="project">
+          <span class="badge-90 pink">
+            [ BEST VIEWED WITH CURIOSITY ]
+          </span>
 
-        <h3>
-          Notebee
-          <span class="status live">ONLINE</span>
-        </h3>
+          <hr class="side-separator">
 
-        <p>
-          Your simple notes, right inside Telegram.
-        </p>
+          <small>
+            WEB STATUS:<br>
+            <span style="color:#94ff43">● ONLINE</span>
+          </small>
 
-        <a
-          class="project-link"
-          href="https://notebeebot.pages.dev/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          &gt;&gt; Explore Notebee
-        </a>
-
-      </article>
-
-      <!-- LIVING FISH -->
-
-      <article class="project">
-
-        <h3>
-          Living Fish
-          <span class="status development">COMING SOON</span>
-        </h3>
-
-        <p>
-          A virtual aquarium experience.
-          Currently in development.
-        </p>
-
-        <p style="
-          color: #ffff00;
-          font-family: 'Courier New', monospace;
-          font-size: 12px;
-        ">
-          [ UNDER CONSTRUCTION ]
-        </p>
-
-      </article>
-
-      <div class="divider" aria-hidden="true">
-        * * * * * * * * *
-      </div>
-
-      <!-- PERSONAL MESSAGE -->
-
-      <aside class="message-box">
-
-        <strong>
-          [ BUILDING IN PUBLIC ]
-        </strong>
-
-        <p>
-          Building, learning & sharing.
-        </p>
-
+        </div>
       </aside>
 
-    </main>
+      <!-- PROJECTS -->
+
+      <main>
+
+        <section id="projects" aria-labelledby="projects-title">
+
+          <h2 class="section-title" id="projects-title">
+            ✦ THINGS I'VE BUILT ✦
+          </h2>
+
+          <!-- CARDBEE -->
+
+          <article class="project reveal">
+
+            <div class="project-header">
+              <h3>CARDBEE</h3>
+              <span class="status online">● ONLINE</span>
+              <span class="new">NEW!</span>
+            </div>
+
+            <p>
+              Create and study flashcards right inside Telegram.
+            </p>
+
+            <a
+              class="project-link"
+              href="https://cardbeebot.pages.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              &gt;&gt; EXPLORE CARDBEE &gt;&gt;
+            </a>
+
+          </article>
+
+          <!-- NOTEBEE -->
+
+          <article class="project reveal">
+
+            <div class="project-header">
+              <h3>NOTEBEE</h3>
+              <span class="status online">● ONLINE</span>
+            </div>
+
+            <p>
+              Your simple notes, right inside Telegram.
+            </p>
+
+            <a
+              class="project-link"
+              href="https://notebeebot.pages.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              &gt;&gt; EXPLORE NOTEBEE &gt;&gt;
+            </a>
+
+          </article>
+
+          <!-- LIVING FISH -->
+
+          <article id="currently-building" class="project reveal">
+
+            <div class="project-header">
+              <h3>LIVING FISH</h3>
+              <span class="status soon">COMING SOON</span>
+            </div>
+
+            <p>
+              A virtual aquarium experience.
+              Currently in development.
+            </p>
+
+            <div class="construction blink">
+              ⚠ [ UNDER CONSTRUCTION ] ⚠
+            </div>
+
+          </article>
+
+        </section>
+
+        <!-- MESSAGE -->
+
+        <section
+          id="broadcast"
+          class="message reveal"
+          aria-label="A message from Kauê"
+        >
+
+          <strong>
+            ✦ [ BUILDING IN PUBLIC ] ✦
+          </strong>
+
+          <p>
+            Building, learning &amp; sharing.
+          </p>
+
+        </section>
+
+      </main>
+    </div>
+
+    <!-- ANIMATED BOTTOM TICKER -->
+
+    <div
+      class="bottom-strip"
+      aria-label="Product transmission: Cardbee, Notebee, Living Fish"
+    >
+
+      <div class="ticker" aria-hidden="true">
+        [ TRANSMISSION IN PROGRESS ] ★ CARDBEE ★ NOTEBEE ★ LIVING FISH ★ [ END OF MESSAGE ]
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        [ TRANSMISSION IN PROGRESS ] ★ CARDBEE ★ NOTEBEE ★ LIVING FISH ★ [ END OF MESSAGE ]
+        &nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+
+    </div>
 
     <!-- FOOTER -->
 
     <footer>
 
-      <div class="footer-stars" aria-hidden="true">
+      <div class="stars" aria-hidden="true">
         ★ ★ ★ ★ ★
       </div>
 
-      <div>
-        KAUÊ OLIVEIRA | OUTSPACE
-      </div>
-
-      <div>
-        Made for the World Wide Web.
-      </div>
+      <div>KAUÊ OLIVEIRA | OUTSPACE</div>
+      <div>Made for the World Wide Web.</div>
 
       <a href="#top">
-        [ BACK TO TOP ]
+        [ ↑ BACK TO TOP ]
       </a>
 
     </footer>
 
   </div>
+
+  <!-- SCROLL ANIMATIONS -->
+
+  <script>
+    document.documentElement.classList.add('js');
+
+    const meter = document.getElementById('scroll-meter');
+    let scrolling = false;
+
+    function updateProgress() {
+      const max =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+      meter.style.width =
+        (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+
+      scrolling = false;
+    }
+
+    addEventListener('scroll', () => {
+      if (!scrolling) {
+        requestAnimationFrame(updateProgress);
+        scrolling = true;
+      }
+    }, { passive: true });
+
+    addEventListener('resize', updateProgress);
+    updateProgress();
+
+    const reduceMotion =
+      matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const reveals = document.querySelectorAll('.reveal');
+
+    if (
+      reduceMotion ||
+      !('IntersectionObserver' in window)
+    ) {
+      reveals.forEach(el => el.classList.add('visible'));
+    } else {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      reveals.forEach(el => observer.observe(el));
+    }
+  </script>
 
 </body>
 </html>
