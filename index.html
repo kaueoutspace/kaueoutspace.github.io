@@ -1,13 +1,212 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Resumé</title>
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kauê Oliveira | Outspace — Building useful and playful products with AI.">
+  <title>Kauê Oliveira | Outspace</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #101014;
+      color: #f4f4f5;
+      display: flex;
+      justify-content: center;
+      padding: 64px 24px;
+    }
+
+    main {
+      width: 100%;
+      max-width: 640px;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #32323c;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin: 24px 0 8px;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+      margin-top: 48px;
+    }
+
+    p {
+      color: #a1a1aa;
+      line-height: 1.7;
+    }
+
+    a {
+      color: #c4b5fd;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .project {
+      padding: 20px 0;
+      border-bottom: 1px solid #27272a;
+    }
+
+    .project h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .project p {
+      margin: 8px 0;
+    }
+
+    footer {
+      margin-top: 56px;
+      color: #71717a;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 40px 20px;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      .avatar {
+        width: 100px;
+        height: 100px;
+      }
+
+      .links {
+        gap: 12px 20px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <h1>My Resumé</h1>
-    <img src="img/perfilNeon.jpg">
+  <main>
+    <header>
+      <img
+        src="img/perfilNeon.jpg"
+        alt="Kauê Oliveira profile picture"
+        class="avatar"
+      >
+
+      <h1>Kauê Oliveira | Outspace</h1>
+
+      <p>
+        Building useful & playful products with AI.
+      </p>
+
+      <p>
+        Sharing product lessons, vibe coding experiments
+        & what I learn along the way.
+      </p>
+
+      <nav class="links" aria-label="Social profiles">
+        <a
+          href="https://x.com/outspace"
+          target="_blank"
+          rel="noopener noreferrer"
+        >X</a>
+
+        <a
+          href="https://www.producthunt.com/@cosmospace"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Product Hunt</a>
+
+        <a
+          href="https://tg.app/creators/kaueoutspace/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >TG.app</a>
+
+        <a
+          href="https://github.com/outspc"
+          target="_blank"
+          rel="noopener noreferrer"
+        >GitHub</a>
+      </nav>
+    </header>
+
+    <section>
+      <h2>Things I've built</h2>
+
+      <article class="project">
+        <h3>Cardbee</h3>
+
+        <p>
+          Create and study flashcards right inside Telegram.
+        </p>
+
+        <a
+          href="https://cardbeebot.pages.dev/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Explore Cardbee →
+        </a>
+      </article>
+
+      <article class="project">
+        <h3>Notebee</h3>
+
+        <p>
+          Your simple notes, right inside Telegram.
+        </p>
+
+        <a
+          href="https://notebeebot.pages.dev/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Explore Notebee →
+        </a>
+      </article>
+
+      <article class="project">
+        <h3>Living Fish</h3>
+
+        <p>
+          A virtual aquarium experience.
+          Currently in development.
+        </p>
+      </article>
+    </section>
+
+    <footer>
+      Building, learning & sharing.
+    </footer>
+  </main>
 </body>
 </html>
